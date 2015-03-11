@@ -1,0 +1,33 @@
+{
+  "name": "banditdb-egreedy",
+  "description": "A Promises/A+, epsilon-greedy multi-armed bandit",
+  "version": "0.0.1",
+  "author": "kurttheviking",
+  "contributors": [
+    "kurttheviking"
+  ],
+  "keywords": [
+    "multi-armed bandit",
+    "epsiolon greedy algorithm",
+    "promise",
+    "promises-a",
+    "promises-aplus"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha ./test/index"
+  },
+  "repository": "git@github.com:banditdb/egreedy.git",
+  "dependencies": {
+    "bluebird": "2.9.13",
+    "lodash": "3.5.0"
+  },
+  "devDependencies": {
+    "chai": "2.1.1",
+    "mocha": "2.2.1",
+    "sinon": "1.13.0",
+    "sinon-chai": "2.7.0"
+  },
+  "readmeFilename": "README.md",
+  "license": "ISC"
+}
