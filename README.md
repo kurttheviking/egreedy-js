@@ -5,6 +5,8 @@
 banditdb-egreedy
 ================
 
+[![Build Status](https://travis-ci.org/banditdb/egreedy.svg)](https://travis-ci.org/banditdb/egreedy)
+
 A Promises/A+, [multi-armed bandit](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with the epsilon-greedy algorithm.
 
 This implemention is based heavily on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do).
