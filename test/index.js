@@ -46,11 +46,11 @@ describe('instance', function () {
     chai.expect(init).to.throw(TypeError);
   });
 
-  describe('.draw', function () {
+  describe('.select', function () {
     it('returns a promise', function () {
       var bandit = new Bandit();
 
-      var res = bandit.draw();
+      var res = bandit.select();
 
       var isValid = _.isFunction(res.then);
       chai.expect(isValid).to.equal(true);
@@ -59,7 +59,7 @@ describe('instance', function () {
     it('resolves to a number', function () {
       var bandit = new Bandit();
 
-      return bandit.draw().then(function (arm) {
+      return bandit.select().then(function (arm) {
         var isValid = _.isNumber(arm);
         chai.expect(isValid).to.equal(true);
       });
@@ -75,7 +75,7 @@ describe('instance', function () {
 
       return BPromise.all(testArms.map(function (arms) {
         var bandit = new Bandit({arms: arms});
-        return bandit.draw();
+        return bandit.select();
       }))
       .then(function (results) {
         var isValid = true;
@@ -94,7 +94,7 @@ describe('instance', function () {
       var bandit = new Bandit();
       var expected = bandit.n;
 
-      return bandit.draw().then(function () {
+      return bandit.select().then(function () {
         var observed = bandit.n;
         chai.expect(observed).to.equal(expected);
       });

@@ -41,20 +41,6 @@ var Algorithm = function (options) {
 
   api.n = 0;
 
-  api.draw = function () {
-    return new BPromise(function (resolve) {
-      var arm;
-
-      if (epsilon > _.random(0, 1, true) || api.n === 0) {
-        arm = _.random(0, arms-1);
-      } else {
-        arm = indexOfMax();
-      }
-
-      resolve(arm);
-    });
-  };
-
   api.load = function (config) {
     arms = config.arms;
     epsilon = config.epsilon;
@@ -87,6 +73,20 @@ var Algorithm = function (options) {
       });
 
       resolve(values);
+    });
+  };
+
+  api.select = function () {
+    return new BPromise(function (resolve) {
+      var arm;
+
+      if (epsilon > _.random(0, 1, true) || api.n === 0) {
+        arm = _.random(0, arms-1);
+      } else {
+        arm = indexOfMax();
+      }
+
+      resolve(arm);
     });
   };
 
