@@ -33,10 +33,6 @@ var Algorithm = function (options) {
     values.push(0);
   }
 
-  function indexOfMax() {
-    return values.indexOf(Math.max.apply(null, values));
-  }
-
   var api = {};
 
   api.n = 0;
@@ -83,7 +79,7 @@ var Algorithm = function (options) {
       if (epsilon > _.random(0, 1, true) || api.n === 0) {
         arm = _.random(0, arms-1);
       } else {
-        arm = indexOfMax();
+        arm = values.indexOf(Math.max.apply(null, values));
       }
 
       resolve(arm);
