@@ -7,7 +7,7 @@ banditdb-egreedy
 
 [![Build Status](https://travis-ci.org/banditdb/egreedy.svg)](https://travis-ci.org/banditdb/egreedy)
 
-A Promises/A+, [multi-armed bandit](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with the epsilon-greedy algorithm.
+A Promises/A+, [multi-armed bandit](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with an epsilon-greedy algorithm.
 
 This implemention is based heavily on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do).
 
@@ -215,3 +215,10 @@ Tests against stochastic methods (e.g. `bandit.select()`) are inherently tricky 
 ## Contribute
 
 PRs are welcome! For bugs, please include a failing test which passes when your PR is applied.
+
+
+## Caveat emptor
+
+Currently, this implementation relies on the [native Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) which uses a seeded "random" number generator. In addition, the underlying calculations often encounter extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de/).
+
+While these factors generally do not impede commercial application, I would consider the implementation suspect in any academic setting.
