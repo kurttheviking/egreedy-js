@@ -1,7 +1,7 @@
 {
   "name": "banditdb-egreedy",
   "description": "A Promises/A+, epsilon-greedy multi-armed bandit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "kurttheviking",
   "contributors": [
     "kurttheviking"
