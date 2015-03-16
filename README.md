@@ -195,8 +195,7 @@ A promise that resolves to an Array of the current reward state of each arm; eac
 ```
 > var Bandit = require('banditdb-egreedy');
 > var bandit = new Bandit();
-> bandit.reward(0, 1).then(function (rewards) { console.log(rewards); });
-> bandit.n;
+> bandit.reward(0, 1).then(function () { console.log(bandit.n); });
 
 1
 ```
