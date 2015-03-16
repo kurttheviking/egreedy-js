@@ -133,7 +133,7 @@ A promise that resolves to an Array of the current reward state of each arm; eac
 
 > bandit.reward(1, 0).then(function (rewards) { console.log(rewards); });
 
-[1, 0.66666]
+[1, 0.5]
 ```
 
 #### `bandit.serialize()`
