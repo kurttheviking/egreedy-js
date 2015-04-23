@@ -2,7 +2,7 @@
     <img src="http://promisesaplus.com/assets/logo-small.png" alt="Promises/A+ logo" title="Promises/A+ 1.0 compliant" align="right" />
 </a>
 
-banditdb-egreedy
+egreedy
 ================
 
 [![Build Status](https://travis-ci.org/banditdb/egreedy.svg)](https://travis-ci.org/banditdb/egreedy)
@@ -17,7 +17,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 1. Create a bandit with 3 arms and epsilon 0.25
 
     ```
-    var Bandit = require('banditdb-egreedy');
+    var Bandit = require('egreedy');
 
     var bandit = new Bandit({
         arms: 3,
@@ -49,13 +49,13 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 Install from npm
 
 ```
-npm install banditdb-egreedy --save
+npm install egreedy --save
 ```
 
 Require in your project
 
 ```
-var Bandit = require('banditdb-egreedy');
+var Bandit = require('egreedy');
 ```
 
 #### Instantiate a bandit
@@ -98,7 +98,7 @@ A promise that resolves to a Number corresponding to the associated arm index.
 **Example**
 
 ```
-> var Bandit = require('banditdb-egreedy');
+> var Bandit = require('egreedy');
 > var bandit = new Bandit();
 > bandit.select().then(function (arm) { console.log(arm); });
 
@@ -121,7 +121,7 @@ A promise that resolves to an Array of the current reward state of each arm; eac
 **Example**
 
 ```
-> var Bandit = require('banditdb-egreedy');
+> var Bandit = require('egreedy');
 > var bandit = new Bandit();
 > bandit.reward(0, 1).then(function (rewards) { console.log(rewards); });
 
@@ -151,7 +151,7 @@ A promise that resolves to an Object representing parameters required to reconst
 **Example**
 
 ```
-> var Bandit = require('banditdb-egreedy');
+> var Bandit = require('egreedy');
 > var bandit = new Bandit();
 > bandit.serialize().then(function (state) { console.log(state); });
 
@@ -179,7 +179,7 @@ A promise that resolves to an Array of the current reward state of each arm; eac
 
 ```
 > var state = { arms: 2, epsilon: 0.5, counts: [ 1, 2 ], values: [ 1, 0.5 ] };
-> var Bandit = require('banditdb-egreedy');
+> var Bandit = require('egreedy');
 > var bandit = new Bandit();
 > bandit.load(state).then(function (rewards) { console.log(rewards); });
 
@@ -193,7 +193,7 @@ A promise that resolves to an Array of the current reward state of each arm; eac
 **Example**
 
 ```
-> var Bandit = require('banditdb-egreedy');
+> var Bandit = require('egreedy');
 > var bandit = new Bandit();
 > bandit.reward(0, 1).then(function () { console.log(bandit.n); });
 
