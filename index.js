@@ -1,102 +1,36 @@
-/* jslint node: true */
-'use strict';
-
 var _ = require('lodash');
 var BPromise = require('bluebird');
+var debug = require('debug')('egreedy');
 
+var async = BPromise.method;
 
-var Algorithm = function (options) {
-  options = options || {};
-  var self = this;
+function Algorithm(options) {
+  var opts = options || {};
 
-  if (!(self instanceof Algorithm)) {
-    return new Algorithm(options);
+  if (!(this instanceof Algorithm)) {
+    return new Algorithm(opts);
   }
 
-  var arms = _.isUndefined(options.arms) ? 2 : parseInt(options.arms, 10);
-  var epsilon = _.isUndefined(options.epsilon) ? 0.5 : parseFloat(options.epsilon);
-  var counts = [];
-  var values = [];
+  debug('init', opts);
 
-  if (arms < 1) {
+  this.arms = _.isUndefined(opts.arms) ? 2 : parseInt(opts.arms, 10);
+  this.epsilon = _.isUndefined(opts.epsilon) ? 0.5 : parseFloat(opts.epsilon);
+
+  if (this.arms < 1) {
     throw new TypeError('invalid arms: cannot be less than 1');
-  }
-  else if (epsilon < 0) {
+  } else if (this.epsilon < 0) {
     throw new TypeError('invalid epsilon: cannot be less than 0');
-  }
-  else if (epsilon > 1) {
+  } else if (this.epsilon > 1) {
     throw new TypeError('invalid epsilon: cannot be greater than 1');
   }
 
-  for (var i=0; i<arms; i++) {
-    counts.push(0);
-    values.push(0);
-  }
+  this.counts = Array.apply(null, Array(this.arms)).map(Number.prototype.valueOf, 0);
+  this.values = Array.apply(null, Array(this.arms)).map(Number.prototype.valueOf, 0);
+}
 
-  var api = {};
-
-  api.n = 0;
-
-  api.load = function (config) {
-    arms = config.arms;
-    epsilon = config.epsilon;
-    counts = config.counts;
-    values = config.values;
-
-    return BPromise.resolve(values);
-  };
-
-  api.reward = function (arm, reward) {
-    return new BPromise(function (resolve, reject) {
-      if (!_.isNumber(arm)) {
-        return reject(new TypeError('missing or invalid required parameter: arm'));
-      }
-      else if (!_.isNumber(reward)) {
-        return reject(new TypeError('missing or invalid required parameter: reward'));
-      }
-      else if (arm >= arms || arm < 0) {
-        return reject(new TypeError('invalid arm: ' + arm + ' not in valid range (0-' + arms.length + ')'));
-      }
-
-      var ct = ++counts[arm];
-      var pre = values[arm];
-      var post = ((ct-1) / ct) * pre + (1/ct) * reward;
-
-      values[arm] = post;
-
-      api.n = _.reduce(counts, function (sum, ct) {
-        return sum + ct;
-      });
-
-      resolve(values);
-    });
-  };
-
-  api.select = function () {
-    return new BPromise(function (resolve) {
-      var arm;
-
-      if (epsilon > _.random(0, 1, true) || api.n === 0) {
-        arm = _.random(0, arms-1);
-      } else {
-        arm = values.indexOf(Math.max.apply(null, values));
-      }
-
-      resolve(arm);
-    });
-  };
-
-  api.serialize = function () {
-    return BPromise.resolve({
-      arms: arms,
-      epsilon: epsilon,
-      counts: counts.slice(0),
-      values: values.slice(0)
-    });
-  };
-
-  return api;
-};
-
+Algorithm.prototype.load = async(require('./lib/load'));
+Algorithm.prototype.reward = async(require('./lib/reward'));
+Algorithm.prototype.select = async(require('./lib/select'));
+Algorithm.prototype.serialize = async(require('./lib/serialize'));
 
 module.exports = Algorithm;

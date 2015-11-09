@@ -1,33 +1,49 @@
 {
   "name": "egreedy",
-  "description": "A Promises/A+ epsilon-greedy multi-armed bandit",
+  "description": "An epsilon-greedy multi-armed bandit algorithm",
   "version": "0.2.1",
-  "author": "banditdb",
-  "contributors": [
-    "kurttheviking"
-  ],
+  "license": "ISC",
+  "main": "index.js",
   "keywords": [
     "multi-armed bandit",
     "epsiolon greedy algorithm",
-    "promise",
-    "promises-a",
-    "promises-aplus"
+    "promises-aplus",
+    "banditlab"
   ],
-  "main": "index.js",
-  "scripts": {
-    "test": "node node_modules/mocha/bin/mocha ./test/index"
+  "author": {
+    "name": "Kurt Ericson",
+    "email": "kurttheviking@outlook.com",
+    "url": "http://github.com/kurttheviking"
   },
-  "repository": "git@github.com:banditdb/egreedy.git",
+  "contributors": [
+    {
+      "name": "Kurt Ericson",
+      "email": "kurttheviking@outlook.com",
+      "url": "https://github.com/kurttheviking"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kurttheviking/egreedy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kurttheviking/egreedy/issues"
+  },
+  "homepage": "https://github.com/kurttheviking/egreedy#readme",
   "dependencies": {
-    "bluebird": "2.9.13",
-    "lodash": "3.5.0"
+    "bluebird": "3.0.5",
+    "lodash": "3.10.1"
   },
   "devDependencies": {
-    "chai": "2.1.1",
-    "mocha": "2.2.1",
-    "sinon": "1.13.0",
-    "sinon-chai": "2.7.0"
+    "chai": "3.4.0",
+    "eslint": "1.9.0",
+    "eslint-config-airbnb": "1.0.0",
+    "istanbul": "0.4.0",
+    "mocha": "2.3.3",
+    "sinon": "1.17.2"
   },
-  "readmeFilename": "README.md",
-  "license": "ISC"
+  "scripts": {
+    "coverage": "./node_modules/istanbul/lib/cli.js cover --report=json-summary --report=html _mocha ./test -- --recursive",
+    "test": "node node_modules/mocha/bin/mocha ./test --recursive"
+  }
 }
