@@ -62,8 +62,8 @@ Create a new optimization algorithm.
 
 The `config` object supports two parameters:
 
-- `arms`: (Number:Integer, Optional), the number of arms over which the optimization will operate, default=2
-- `epsilon`: (Number:Float, Optional), from 0 (never explore/always exploit) to 1 (always explore/never exploit), default=0.5
+- `arms`: (Number:Integer, Optional), default: 2, the number of arms over which the optimization will operate
+- `epsilon`: (Number:Float, Optional), default: 0.5, from 0 (never explore/always exploit) to 1 (always explore/never exploit)
 
 **Returns**
 
