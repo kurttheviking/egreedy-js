@@ -1,11 +1,6 @@
-<a href="http://promisesaplus.com/">
-    <img src="http://promisesaplus.com/assets/logo-small.png" alt="Promises/A+ logo" title="Promises/A+ 1.0 compliant" align="right" />
-</a>
+# egreedy
 
-egreedy
-================
-
-[![Build Status](https://travis-ci.org/banditdb/egreedy.svg)](https://travis-ci.org/banditdb/egreedy)
+[![Build Status](https://travis-ci.org/kurttheviking/egreedy.svg)](https://travis-ci.org/kurttheviking/egreedy)
 
 A Promises/A+, [multi-armed bandit](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with an epsilon-greedy algorithm.
 
@@ -16,7 +11,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
 1. Create a bandit with 3 arms and epsilon 0.25
 
-    ```
+    ```js
     var Bandit = require('egreedy');
 
     var bandit = new Bandit({
@@ -27,7 +22,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
 2. Select an arm (for exploration or exploitation, according to the algorithm)
 
-    ```
+    ```js
     bandit.select().then(function (arm) {
         console.log('pulled arm=' + arm);
     });
@@ -35,7 +30,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
 3. Report the reward earned from a chosen arm
 
-    ```
+    ```js
     bandit.reward(1, 1).then(function (rewards) {
         console.log('arm rewards are currently=' + rewards);
     });
@@ -46,21 +41,21 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
 #### Load the bandit algorithm
 
-Install from npm
+Install from npm:
 
-```
+```sh
 npm install egreedy --save
 ```
 
 Require in your project
 
-```
+```js
 var Bandit = require('egreedy');
 ```
 
 #### Instantiate a bandit
 
-This algorithm defaults to 2 arms and eplsilon 0.5
+This algorithm defaults to 2 arms and epsilon 0.5
 
 ```
 var bandit = new Bandit();
@@ -81,7 +76,7 @@ var bandit = new Bandit({
 
 ## API
 
-All banditdb algorithms, including this implementation, provide the same Promises/A+ interface.
+This module conforms to the [Bandit Lab 1.0 specification](https://github.com/banditlab/spec-js/blob/master/README.md).
 
 #### `bandit.select()`
 
@@ -97,7 +92,7 @@ A promise that resolves to a Number corresponding to the associated arm index.
 
 **Example**
 
-```
+```js
 > var Bandit = require('egreedy');
 > var bandit = new Bandit();
 > bandit.select().then(function (arm) { console.log(arm); });
@@ -116,29 +111,21 @@ Inform the algorithm about the payoff from a given arm.
 
 **Returns**
 
-A promise that resolves to an Array of the current reward state of each arm; each position in the array corresponds to the associated arm index.
+A promise that resolves to a Number representing the count of observed rounds.
 
 **Example**
 
-```
+```js
 > var Bandit = require('egreedy');
 > var bandit = new Bandit();
-> bandit.reward(0, 1).then(function (rewards) { console.log(rewards); });
+> bandit.reward(0, 1).then(function (n) { console.log(n); });
 
-[1, 0]
-
-> bandit.reward(1, 1).then(function (rewards) { console.log(rewards); });
-
-[1, 1]
-
-> bandit.reward(1, 0).then(function (rewards) { console.log(rewards); });
-
-[1, 0.5]
+1
 ```
 
 #### `bandit.serialize()`
 
-Obtain a persistable JSON object representing the internal state of the algorithm.
+Obtain a plain object representing the internal state of the algorithm.
 
 **Arguments**
 
@@ -150,7 +137,7 @@ A promise that resolves to an Object representing parameters required to reconst
 
 **Example**
 
-```
+```js
 > var Bandit = require('egreedy');
 > var bandit = new Bandit();
 > bandit.serialize().then(function (state) { console.log(state); });
@@ -158,14 +145,14 @@ A promise that resolves to an Object representing parameters required to reconst
 {
     arms: 2,
     epsilon: 0.5,
-    counts: [ 0, 0 ],
-    values: [ 0, 0 ]
+    counts: [0, 0],
+    values: [0, 0]
 }
 ```
 
 #### `bandit.load(state)`
 
-Restore an instance of a bandit to a perviously serialized algorithm state. This method overrides any options parameters passed at instantiation.
+Restore an instance of a bandit to a previously serialized algorithm state. This method overrides any options parameters passed at instantiation.
 
 **Arguments**
 
@@ -173,31 +160,17 @@ Restore an instance of a bandit to a perviously serialized algorithm state. This
 
 **Returns**
 
-A promise that resolves to an Array of the current reward state of each arm; each position in the array corresponds to the associated arm index.
+A promise that resolves to a Number representing the count of observed rounds.
 
 **Example**
 
-```
-> var state = { arms: 2, epsilon: 0.5, counts: [ 1, 2 ], values: [ 1, 0.5 ] };
+```js
+> var state = {arms: 2, epsilon: 0.5, counts: [1, 2], values: [1, 0.5]};
 > var Bandit = require('egreedy');
 > var bandit = new Bandit();
-> bandit.load(state).then(function (rewards) { console.log(rewards); });
+> bandit.load(state).then(function (n) { console.log(n); });
 
-[1, 0.5]
-```
-
-#### `bandit.n`
-
-(Number) An instance property representing the total number of recorded reward samples, updated at each `bandit.reward()` call.
-
-**Example**
-
-```
-> var Bandit = require('egreedy');
-> var bandit = new Bandit();
-> bandit.reward(0, 1).then(function () { console.log(bandit.n); });
-
-1
+3
 ```
 
 
