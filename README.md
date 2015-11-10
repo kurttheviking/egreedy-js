@@ -51,7 +51,7 @@ This module conforms to the [Bandit Lab 1.0 specification](https://github.com/ba
 
 #### `Bandit([config])`
 
-Creates a new optimization algorithm. This algorithm defaults to 2 arms and epsilon 0.5:
+Creates a new optimization algorithm.
 
 **Arguments**
 
@@ -59,8 +59,8 @@ Creates a new optimization algorithm. This algorithm defaults to 2 arms and epsi
 
 The `config` object supports two parameters:
 
-- `arms`: integer, the number of arms over which the optimization will operate
-- `epsilon`: float, from 0 (never explore/always exploit) to 1 (always explore/never exploit)
+- `arms`: (Number:Integer, Optional), the number of arms over which the optimization will operate, default=2
+- `epsilon`: (Number:Float, Optional), from 0 (never explore/always exploit) to 1 (always explore/never exploit), default=0.5
 
 **Returns**
 
@@ -75,7 +75,7 @@ An instance of the egreedy bandit optimization algorithm.
 > assert.equal(bandit.epsilon, 0.5);
 ```
 
-Or, with a passed config:
+Or, with a passed `config`:
 
 ```js
 > var Bandit = require('egreedy');
