@@ -9,6 +9,14 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
 ## Quick start
 
+First, install this module in your project:
+
+```sh
+npm install egreedy --save
+```
+
+Then, use the algorithm:
+
 1. Create a bandit with 3 arms and epsilon 0.25:
 
     ```js
@@ -37,48 +45,35 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
     ```
 
 
-## Configuration
-
-#### Load the bandit algorithm
-
-Install from npm:
-
-```sh
-npm install egreedy --save
-```
-
-Require in your project
-
-```js
-var Bandit = require('egreedy');
-```
-
-#### Instantiate a bandit
-
-This algorithm defaults to 2 arms and epsilon 0.5
-
-```
-var bandit = new Bandit();
-```
-
-The constructor accepts an options object that supports two parameters:
-
-- `arms`: the number of arms over which the bandit can operate
-- `epsilon`: the desired level of epsilon (from 0=never explore/always exploit to 1=always explore/never exploit)
-
-```
-var bandit = new Bandit({
-  arms: 4,
-  epsilon: 0.75
-});
-```
-
-
 ## API
 
 This module conforms to the [Bandit Lab 1.0 specification](https://github.com/banditlab/spec-js/blob/master/README.md).
 
-#### `bandit.select()`
+#### `Bandit([config])`
+
+This algorithm defaults to 2 arms and epsilon 0.5:
+
+```js
+var bandit = new Bandit();
+assert.equal(bandit.arms, 3);
+assert.equal(bandit.epsilon, 0.5);
+```
+
+The constructor also accepts a `config` object that supports two parameters:
+
+- `arms`: integer, the number of arms over which the optimization will operate
+- `epsilon`: float, from 0 (never explore/always exploit) to 1 (always explore/never exploit)
+
+```js
+var bandit = new Bandit({
+  arms: 4,
+  epsilon: 0.75
+});
+assert.equal(bandit.arms, 4);
+assert.equal(bandit.epsilon, 0.75);
+```
+
+#### `Bandit#select()`
 
 Choose an arm to play, according to the specified bandit algorithm.
 
@@ -100,7 +95,7 @@ A promise that resolves to a Number corresponding to the associated arm index.
 0
 ```
 
-#### `bandit.reward(arm, reward)`
+#### `Bandit#reward(arm, reward)`
 
 Inform the algorithm about the payoff from a given arm.
 
