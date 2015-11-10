@@ -45,9 +45,12 @@ Then, use the algorithm:
     ```
 
 
-## API
+## Specification
 
-This module conforms to the [Bandit Lab 1.0 specification](https://github.com/banditlab/spec-js/blob/master/README.md).
+This module conforms to the [BanditLab/1.0 specification](https://github.com/banditlab/spec-js/blob/master/README.md).
+
+
+## API
 
 #### `Bandit([config])`
 
