@@ -31,7 +31,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 3. Report the reward earned from a chosen arm:
 
     ```js
-    bandit.reward(1, 1).then(function (n) {
+    bandit.reward(armId, value).then(function (n) {
       console.log('total observations=' + n);
     });
     ```
