@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/kurttheviking/egreedy.svg)](https://travis-ci.org/kurttheviking/egreedy)
 
-A Promises/A+, [multi-armed bandit optimization](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with an epsilon-greedy algorithm.
+**A Promises/A+, [multi-armed bandit optimization](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with an epsilon-greedy algorithm.**
 
 This implemention is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](https://d2w9gswcdc2jtf.cloudfront.net/research/Algorithms+for+the+multi-armed+bandit+problem.pdf).
 
