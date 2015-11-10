@@ -51,7 +51,7 @@ This module conforms to the [Bandit Lab 1.0 specification](https://github.com/ba
 
 #### `Bandit([config])`
 
-Creates a new optimization algorithm.
+Create a new optimization algorithm.
 
 **Arguments**
 
