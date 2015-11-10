@@ -51,26 +51,37 @@ This module conforms to the [Bandit Lab 1.0 specification](https://github.com/ba
 
 #### `Bandit([config])`
 
-This algorithm defaults to 2 arms and epsilon 0.5:
+Creates a new optimization algorithm. This algorithm defaults to 2 arms and epsilon 0.5:
 
-```js
-var bandit = new Bandit();
-assert.equal(bandit.arms, 3);
-assert.equal(bandit.epsilon, 0.5);
-```
+**Arguments**
 
-The constructor also accepts a `config` object that supports two parameters:
+- `config` (Object, Optional): algorithm instance parameters
+
+The `config` object supports two parameters:
 
 - `arms`: integer, the number of arms over which the optimization will operate
 - `epsilon`: float, from 0 (never explore/always exploit) to 1 (always explore/never exploit)
 
+**Returns**
+
+An instance of the egreedy bandit optimization algorithm.
+
+**Example**
+
 ```js
-var bandit = new Bandit({
-  arms: 4,
-  epsilon: 0.75
-});
-assert.equal(bandit.arms, 4);
-assert.equal(bandit.epsilon, 0.75);
+> var Bandit = require('egreedy');
+> var bandit = new Bandit();
+> assert.equal(bandit.arms, 3);
+> assert.equal(bandit.epsilon, 0.5);
+```
+
+Or, with a passed config:
+
+```js
+> var Bandit = require('egreedy');
+> var bandit = new Bandit({arms: 4, epsilon: 0.75});
+> assert.equal(bandit.arms, 4);
+> assert.equal(bandit.epsilon, 0.75);
 ```
 
 #### `Bandit#select()`
@@ -118,7 +129,7 @@ A promise that resolves to a Number representing the count of observed rounds.
 1
 ```
 
-#### `bandit.serialize()`
+#### `Bandit#serialize()`
 
 Obtain a plain object representing the internal state of the algorithm.
 
@@ -145,7 +156,7 @@ A promise that resolves to an Object representing parameters required to reconst
 }
 ```
 
-#### `bandit.load(state)`
+#### `Bandit#load(state)`
 
 Restore an instance of a bandit to a previously serialized algorithm state. This method overrides any options parameters passed at instantiation.
 
