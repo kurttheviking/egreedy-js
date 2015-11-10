@@ -15,8 +15,8 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
     var Bandit = require('egreedy');
 
     var bandit = new Bandit({
-        arms: 3,
-        epsilon: 0.25
+      arms: 3,
+      epsilon: 0.25
     });
     ```
 
@@ -24,7 +24,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
     ```js
     bandit.select().then(function (arm) {
-        console.log('pulled arm=' + arm);
+      console.log('pulled arm=' + arm);
     });
     ```
 
@@ -32,7 +32,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
     ```js
     bandit.reward(1, 1).then(function (n) {
-        console.log('total observations=' + n);
+      console.log('total observations=' + n);
     });
     ```
 
@@ -68,8 +68,8 @@ The constructor accepts an options object that supports two parameters:
 
 ```
 var bandit = new Bandit({
-    arms: 4,
-    epsilon: 0.75
+  arms: 4,
+  epsilon: 0.75
 });
 ```
 
@@ -143,10 +143,10 @@ A promise that resolves to an Object representing parameters required to reconst
 > bandit.serialize().then(function (state) { console.log(state); });
 
 {
-    arms: 2,
-    epsilon: 0.5,
-    counts: [0, 0],
-    values: [0, 0]
+  arms: 2,
+  epsilon: 0.5,
+  counts: [0, 0],
+  values: [0, 0]
 }
 ```
 
