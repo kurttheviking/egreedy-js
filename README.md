@@ -9,7 +9,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
 
 ## Quick start
 
-1. Create a bandit with 3 arms and epsilon 0.25
+1. Create a bandit with 3 arms and epsilon 0.25:
 
     ```js
     var Bandit = require('egreedy');
@@ -20,7 +20,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
     });
     ```
 
-2. Select an arm (for exploration or exploitation, according to the algorithm)
+2. Select an arm (for exploration or exploitation, according to the algorithm):
 
     ```js
     bandit.select().then(function (arm) {
@@ -28,7 +28,7 @@ This implemention is based on [<em>Bandit Algorithms for Website Optimization</e
     });
     ```
 
-3. Report the reward earned from a chosen arm
+3. Report the reward earned from a chosen arm:
 
     ```js
     bandit.reward(1, 1).then(function (n) {
