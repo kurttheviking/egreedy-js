@@ -186,7 +186,7 @@ A promise that resolves to a Number representing the count of observed rounds.
 
 ## Tests
 
-To run the unit test suite
+To run the unit test suite:
 
 ```
 npm test
@@ -203,7 +203,7 @@ npm run coverage
 
 ## Contribute
 
-PRs are welcome! For bugs, please include a failing test which passes when your PR is applied.
+PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/egreedy) provides on-demand testing for commits and pull requests.
 
 
 ## Caveat emptor
