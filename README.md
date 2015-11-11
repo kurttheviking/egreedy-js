@@ -1,10 +1,16 @@
-# egreedy
+egreedy
+=======
 
 [![Build Status](https://travis-ci.org/kurttheviking/egreedy.svg)](https://travis-ci.org/kurttheviking/egreedy)
 
-**A Promises/A+, [multi-armed bandit optimization](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with an epsilon-greedy algorithm.**
+**An epsilon-greedy multi-armed bandit algorithm**
 
-This implemention is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](https://d2w9gswcdc2jtf.cloudfront.net/research/Algorithms+for+the+multi-armed+bandit+problem.pdf).
+This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](https://d2w9gswcdc2jtf.cloudfront.net/research/Algorithms+for+the+multi-armed+bandit+problem.pdf).
+
+
+## Specification
+
+This module conforms to the [BanditLab/1.0 specification](https://github.com/banditlab/spec-js/blob/master/README.md).
 
 
 ## Quick start
@@ -32,7 +38,7 @@ Then, use the algorithm:
 
     ```js
     bandit.select().then(function (arm) {
-      console.log('pulled arm=' + arm);
+      ...
     });
     ```
 
@@ -40,14 +46,9 @@ Then, use the algorithm:
 
     ```js
     bandit.reward(armId, value).then(function (n) {
-      console.log('total observations=' + n);
+      ...
     });
     ```
-
-
-## Specification
-
-This module conforms to the [BanditLab/1.0 specification](https://github.com/banditlab/spec-js/blob/master/README.md).
 
 
 ## API
@@ -67,7 +68,7 @@ The `config` object supports two parameters:
 
 **Returns**
 
-An instance of the egreedy bandit optimization algorithm.
+An instance of the egreedy optimization algorithm.
 
 **Example**
 
@@ -185,13 +186,19 @@ A promise that resolves to a Number representing the count of observed rounds.
 
 ## Tests
 
-To run the full unit test suite
+To run the unit test suite
 
 ```
 npm test
 ```
 
-Tests against stochastic methods (e.g. `bandit.select()`) are inherently tricky to test with deterministic assertions. The approach here is to iterate across a semi-random set of conditions to verify that each run produces valid output. So, strictly speaking, each call to `npm test` is executing a slightly different test suite. At some point, the test suite may be expanded to include a more robust test of the distribution's properties &ndash; though because of the number of runs required, would be triggered with an optional flag.
+Or, to run the test suite and view test coverage:
+
+```sh
+npm run coverage
+```
+
+**Note:** tests against stochastic methods (e.g. `bandit.select()`) are inherently tricky to test with deterministic assertions. The approach here is to iterate across a semi-random set of conditions to verify that each run produces valid output. So, strictly speaking, each call to `npm test` is executing a slightly different test suite. At some point, the test suite may be expanded to include a more robust test of the distribution's properties &ndash; though because of the number of runs required, would be triggered with an optional flag.
 
 
 ## Contribute
@@ -201,6 +208,6 @@ PRs are welcome! For bugs, please include a failing test which passes when your 
 
 ## Caveat emptor
 
-Currently, this implementation relies on the [native Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) which uses a seeded "random" number generator. In addition, the underlying calculations often encounter extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de/).
+Currently, this implementation relies on the [native Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) which uses a seeded "random" number generator. In addition, the underlying calculations often encounter extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de).
 
-While these factors generally do not impede commercial application, I would consider the implementation suspect in any academic setting.
+While these factors generally do not impede commercial application, I would consider the implementation suspect in an academic setting.
