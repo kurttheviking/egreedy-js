@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": "airbnb/base",
   "rules": {
     "comma-dangle": [2, "never"],
     "max-len": [2, 90, 2],

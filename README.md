@@ -23,12 +23,12 @@ npm install egreedy --save
 
 Then, use the algorithm:
 
-1. Create a bandit with 3 arms and epsilon 0.25:
+1. Create an optimizer with 3 arms and epsilon 0.25:
 
     ```js
-    var Bandit = require('egreedy');
+    var Algorithm = require('egreedy');
 
-    var bandit = new Bandit({
+    var algorithm = new Algorithm({
       arms: 3,
       epsilon: 0.25
     });
@@ -37,7 +37,7 @@ Then, use the algorithm:
 2. Select an arm (for exploration or exploitation, according to the algorithm):
 
     ```js
-    bandit.select().then(function (arm) {
+    algorithm.select().then(function (arm) {
       ...
     });
     ```
@@ -45,7 +45,7 @@ Then, use the algorithm:
 3. Report the reward earned from a chosen arm:
 
     ```js
-    bandit.reward(armId, value).then(function (n) {
+    algorithm.reward(armId, value).then(function (n) {
       ...
     });
     ```
@@ -53,7 +53,7 @@ Then, use the algorithm:
 
 ## API
 
-#### `Bandit([config])`
+#### `Algorithm([config])`
 
 Create a new optimization algorithm.
 
@@ -73,22 +73,22 @@ An instance of the egreedy optimization algorithm.
 **Example**
 
 ```js
-> var Bandit = require('egreedy');
-> var bandit = new Bandit();
-> assert.equal(bandit.arms, 3);
-> assert.equal(bandit.epsilon, 0.5);
+> var Algorithm = require('egreedy');
+> var algorithm = new Algorithm();
+> assert.equal(algorithm.arms, 3);
+> assert.equal(algorithm.epsilon, 0.5);
 ```
 
 Or, with a passed `config`:
 
 ```js
-> var Bandit = require('egreedy');
-> var bandit = new Bandit({arms: 4, epsilon: 0.75});
-> assert.equal(bandit.arms, 4);
-> assert.equal(bandit.epsilon, 0.75);
+> var Algorithm = require('egreedy');
+> var algorithm = new Algorithm({arms: 4, epsilon: 0.75});
+> assert.equal(algorithm.arms, 4);
+> assert.equal(algorithm.epsilon, 0.75);
 ```
 
-#### `Bandit#select()`
+#### `Algorithm#select()`
 
 Choose an arm to play, according to the specified bandit algorithm.
 
@@ -103,20 +103,20 @@ A promise that resolves to a Number corresponding to the associated arm index.
 **Example**
 
 ```js
-> var Bandit = require('egreedy');
-> var bandit = new Bandit();
-> bandit.select().then(function (arm) { console.log(arm); });
+> var Algorithm = require('egreedy');
+> var algorithm = new Algorithm();
+> algorithm.select().then(function (arm) { console.log(arm); });
 
 0
 ```
 
-#### `Bandit#reward(arm, reward)`
+#### `Algorithm#reward(arm, reward)`
 
 Inform the algorithm about the payoff from a given arm.
 
 **Arguments**
 
-- `arm` (Integer): the arm index (provided from `bandit.select()`)
+- `arm` (Integer): the arm index (provided from `algorithm.select()`)
 - `reward` (Number): the observed reward value (which can be 0, to indicate no reward)
 
 **Returns**
@@ -126,14 +126,14 @@ A promise that resolves to a Number representing the count of observed rounds.
 **Example**
 
 ```js
-> var Bandit = require('egreedy');
-> var bandit = new Bandit();
-> bandit.reward(0, 1).then(function (n) { console.log(n); });
+> var Algorithm = require('egreedy');
+> var algorithm = new Algorithm();
+> algorithm.reward(0, 1).then(function (n) { console.log(n); });
 
 1
 ```
 
-#### `Bandit#serialize()`
+#### `Algorithm#serialize()`
 
 Obtain a plain object representing the internal state of the algorithm.
 
@@ -148,9 +148,9 @@ A promise that resolves to an Object representing parameters required to reconst
 **Example**
 
 ```js
-> var Bandit = require('egreedy');
-> var bandit = new Bandit();
-> bandit.serialize().then(function (state) { console.log(state); });
+> var Algorithm = require('egreedy');
+> var algorithm = new Algorithm();
+> algorithm.serialize().then(function (state) { console.log(state); });
 
 {
   arms: 2,
@@ -160,13 +160,13 @@ A promise that resolves to an Object representing parameters required to reconst
 }
 ```
 
-#### `Bandit#load(state)`
+#### `Algorithm#load(state)`
 
-Restore an instance of a bandit to a previously serialized algorithm state. This method overrides any options parameters passed at instantiation.
+Restore an instance of an algorithm to a previously serialized state. This method overrides any options parameters passed at instantiation.
 
 **Arguments**
 
-- `state` (Object): a serialized algorithm state (provided from `bandit.serialize()`)
+- `state` (Object): a serialized algorithm state (provided from `algorithm.serialize()`)
 
 **Returns**
 
@@ -176,9 +176,9 @@ A promise that resolves to a Number representing the count of observed rounds.
 
 ```js
 > var state = {arms: 2, epsilon: 0.5, counts: [1, 2], values: [1, 0.5]};
-> var Bandit = require('egreedy');
-> var bandit = new Bandit();
-> bandit.load(state).then(function (n) { console.log(n); });
+> var Algorithm = require('egreedy');
+> var algorithm = new Algorithm();
+> algorithm.load(state).then(function (n) { console.log(n); });
 
 3
 ```
@@ -198,7 +198,7 @@ Or, to run the test suite and view test coverage:
 npm run coverage
 ```
 
-**Note:** tests against stochastic methods (e.g. `bandit.select()`) are inherently tricky to test with deterministic assertions. The approach here is to iterate across a semi-random set of conditions to verify that each run produces valid output. So, strictly speaking, each call to `npm test` is executing a slightly different test suite. At some point, the test suite may be expanded to include a more robust test of the distribution's properties &ndash; though because of the number of runs required, would be triggered with an optional flag.
+**Note:** tests against stochastic methods (e.g. `algorithm.select()`) are inherently tricky to test with deterministic assertions. The approach here is to iterate across a semi-random set of conditions to verify that each run produces valid output. So, strictly speaking, each call to `npm test` is executing a slightly different test suite. At some point, the test suite may be expanded to include a more robust test of the distribution's properties &ndash; though because of the number of runs required, would be triggered with an optional flag.
 
 
 ## Contribute

@@ -5,7 +5,7 @@ var chai = require('chai');
 
 var expect = chai.expect;
 
-describe('Algorithm#serialize', function() {
+describe('#serialize()', function() {
   var Algorithm = require('../../index');
   var arms = _.random(1, 10);
   var config = {
