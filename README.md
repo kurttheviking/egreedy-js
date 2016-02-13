@@ -210,4 +210,4 @@ PRs are welcome! For bugs, please include a failing test which passes when your 
 
 Currently, this implementation relies on the [native Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) which uses a seeded "random" number generator. In addition, the underlying calculations often encounter extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de).
 
-While these factors generally do not impede commercial application, I would consider the implementation suspect in an academic setting.
+While these factors generally do not impede general application, I would consider the implementation suspect in an academic setting.
