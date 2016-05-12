@@ -1,7 +1,7 @@
 egreedy
 =======
 
-[![Build Status](https://travis-ci.org/kurttheviking/egreedy.svg)](https://travis-ci.org/kurttheviking/egreedy)
+[![Build Status](https://travis-ci.org/kurttheviking/egreedy-js.svg?branch=master)](https://travis-ci.org/kurttheviking/egreedy-js)
 
 **An epsilon-greedy algorithm for multi-armed bandit problems**
 
