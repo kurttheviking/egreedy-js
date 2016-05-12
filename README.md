@@ -3,7 +3,7 @@ egreedy
 
 [![Build Status](https://travis-ci.org/kurttheviking/egreedy-js.svg?branch=master)](https://travis-ci.org/kurttheviking/egreedy-js)
 
-**An epsilon-greedy algorithm for multi-armed bandit problems**
+**An epsilon-greedy multi-armed bandit algorithm**
 
 This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](http://www.cs.mcgill.ca/~vkules/bandits.pdf).
 
