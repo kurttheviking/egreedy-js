@@ -112,7 +112,7 @@ algorithm.select().then(function (arm) { console.log(arm); });
 ```
 
 ```js
-> 0
+0
 ```
 
 #### `Algorithm#reward(arm, reward)`
