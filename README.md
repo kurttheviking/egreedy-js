@@ -109,8 +109,10 @@ var Algorithm = require('egreedy');
 var algorithm = new Algorithm();
 
 algorithm.select().then(function (arm) { console.log(arm); });
+```
 
-0
+```js
+> 0
 ```
 
 #### `Algorithm#reward(arm, reward)`
@@ -133,7 +135,9 @@ var Algorithm = require('egreedy');
 var algorithm = new Algorithm();
 
 algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
+```
 
+```js
 <Algorithm>{
   arms: 2,
   epsilon: 0.5,
@@ -161,7 +165,9 @@ var Algorithm = require('egreedy');
 var algorithm = new Algorithm();
 
 algorithm.serialize().then(function (state) { console.log(state); });
+```
 
+```js
 {
   arms: 2,
   epsilon: 0.5,
