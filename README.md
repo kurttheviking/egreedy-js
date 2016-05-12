@@ -117,7 +117,7 @@ algorithm.select().then(function (arm) { console.log(arm); });
 
 #### `Algorithm#reward(arm, reward)`
 
-Inform the algorithm about the payoff from a given arm.
+Inform the algorithm about the payoff earned from a given arm.
 
 **Arguments**
 
