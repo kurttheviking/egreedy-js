@@ -126,7 +126,7 @@ Inform the algorithm about the payoff from a given arm.
 
 **Returns**
 
-A promise that resolves to a Number representing the count of observed rounds.
+A promise that resolves to an updated instance of the algorithm.
 
 **Example**
 
