@@ -24,12 +24,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kurttheviking/egreedy.git"
+    "url": "git://github.com/kurttheviking/egreedy-js.git"
   },
   "bugs": {
-    "url": "https://github.com/kurttheviking/egreedy/issues"
+    "url": "https://github.com/kurttheviking/egreedy-js/issues"
   },
-  "homepage": "https://github.com/kurttheviking/egreedy#readme",
+  "homepage": "https://github.com/kurttheviking/egreedy-js#readme",
   "dependencies": {
     "bluebird": "3.3.5",
     "debug": "2.2.0",
