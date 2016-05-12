@@ -5,22 +5,22 @@ var chai = require('chai');
 
 var expect = chai.expect;
 
-describe('#serialize()', function() {
-  var Algorithm = require('../../index');
+describe('Algorithm#serialize', function () {
+  var Algorithm = require('../../../index');  // eslint-disable-line global-require
   var arms = _.random(1, 10);
   var config = {
     arms: arms,
     epsilon: _.random(0, 1, true)
   };
 
-  it('returns a valid state', function() {
+  it('returns a valid state', function () {
     var alg = new Algorithm(config);
 
     var expected = _.cloneDeep(config);
     expected.counts = Array.apply(null, Array(arms)).map(Number.prototype.valueOf, 0);
     expected.values = Array.apply(null, Array(arms)).map(Number.prototype.valueOf, 0);
 
-    return alg.serialize().then(function(state) {
+    return alg.serialize().then(function (state) {
       expect(state).to.have.property('arms', config.arms);
       expect(state).to.have.property('epsilon', config.epsilon);
 

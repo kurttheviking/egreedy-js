@@ -1,8 +1,10 @@
 {
   "extends": "airbnb/base",
   "rules": {
-    "comma-dangle": [2, "never"],
-    "max-len": [2, 90, 2],
-    "no-var": 0
+    "comma-dangle": 0,
+    "max-len": [2, 100, 2],
+    "no-var": 0,
+    "object-shorthand": 0,
+    "prefer-arrow-callback": 0
   }
 }

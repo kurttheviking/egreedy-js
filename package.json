@@ -8,17 +8,17 @@
     "multi-armed bandit",
     "epsiolon greedy algorithm",
     "promises-aplus",
-    "banditlab"
+    "banditlab/2.0"
   ],
   "author": {
     "name": "Kurt Ericson",
-    "email": "kurttheviking@outlook.com",
+    "email": "github@kurttheviking.com",
     "url": "http://github.com/kurttheviking"
   },
   "contributors": [
     {
       "name": "Kurt Ericson",
-      "email": "kurttheviking@outlook.com",
+      "email": "github@kurttheviking.com",
       "url": "https://github.com/kurttheviking"
     }
   ],
@@ -31,21 +31,24 @@
   },
   "homepage": "https://github.com/kurttheviking/egreedy#readme",
   "dependencies": {
-    "bluebird": "3.3.0",
+    "bluebird": "3.3.5",
     "debug": "2.2.0",
-    "lodash": "4.3.0"
+    "lodash": "4.12.0",
+    "mockery": "^1.7.0"
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "eslint": "1.10.3",
-    "eslint-config-airbnb": "5.0.0",
-    "mocha-eslint": "1.0.0",
-    "istanbul": "0.4.2",
+    "eslint": "2.9.0",
+    "eslint-config-airbnb": "9.0.1",
+    "mocha-eslint": "2.0.2",
+    "istanbul": "0.4.3",
     "mocha": "2.4.5",
-    "sinon": "1.17.3"
+    "mockery": "1.7.0",
+    "sinon": "1.17.4"
   },
   "scripts": {
     "coverage": "./node_modules/istanbul/lib/cli.js cover --report=json-summary --report=html _mocha ./test -- --recursive",
     "test": "node node_modules/mocha/bin/mocha ./test --recursive"
-  }
+  },
+  "tonicExampleFilename": "./opt/tonic.js"
 }

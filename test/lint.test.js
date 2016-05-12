@@ -2,8 +2,7 @@ var lint = require('mocha-eslint');
 
 var options = {};
 var paths = [
-  'lib',
-  'index.js'
+  'lib'
 ];
 
 options.formatter = 'compact';
