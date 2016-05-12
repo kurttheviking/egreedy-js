@@ -23,7 +23,7 @@ npm install egreedy --save
 
 Then, use the algorithm:
 
-1. Create an optimizer with 3 arms and epsilon 0.25:
+1. Create an optimizer with `3` arms and epsilon `0.25`:
 
     ```js
     var Algorithm = require('egreedy');
@@ -45,15 +45,13 @@ Then, use the algorithm:
 3. Report the reward earned from a chosen arm:
 
     ```js
-    algorithm.reward(armId, value).then(function (n) {
-      ...
-    });
+    algorithm.reward(arm, value);
     ```
 
 
 ## API
 
-#### `Algorithm([config])`
+#### `Algorithm(config)`
 
 Create a new optimization algorithm.
 
@@ -65,6 +63,8 @@ The `config` object supports two parameters:
 
 - `arms`: (Number:Integer, Optional), default=2, the number of arms over which the optimization will operate
 - `epsilon`: (Number:Float, Optional), default=0.5, from 0 (never explore/always exploit) to 1 (always explore/never exploit)
+
+Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/egreedy#algorithmserialize) can be passed as `config`.
 
 **Returns**
 
@@ -128,9 +128,14 @@ A promise that resolves to a Number representing the count of observed rounds.
 ```js
 > var Algorithm = require('egreedy');
 > var algorithm = new Algorithm();
-> algorithm.reward(0, 1).then(function (n) { console.log(n); });
+> algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
 
-1
+<Algorithm>{
+  arms: 2,
+  epsilon: 0.5,
+  counts: [ 1, 0 ],
+  values: [ 1, 0 ]
+}
 ```
 
 #### `Algorithm#serialize()`
@@ -160,29 +165,6 @@ A promise that resolves to an Object representing parameters required to reconst
 }
 ```
 
-#### `Algorithm#load(state)`
-
-Restore an instance of an algorithm to a previously serialized state. This method overrides any options parameters passed at instantiation.
-
-**Arguments**
-
-- `state` (Object): a serialized algorithm state (provided from `algorithm.serialize()`)
-
-**Returns**
-
-A promise that resolves to a Number representing the count of observed rounds.
-
-**Example**
-
-```js
-> var state = {arms: 2, epsilon: 0.5, counts: [1, 2], values: [1, 0.5]};
-> var Algorithm = require('egreedy');
-> var algorithm = new Algorithm();
-> algorithm.load(state).then(function (n) { console.log(n); });
-
-3
-```
-
 
 ## Tests
 
@@ -210,4 +192,4 @@ PRs are welcome! For bugs, please include a failing test which passes when your 
 
 This implementation relies on the [native Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) which uses a seeded "random" number generator. In addition, the underlying calculations often encounter extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de).
 
-While these factors generally do not impede common application, I would consider the implementation suspect in an academic setting.
+While these factors generally do not impede common application, I would consider the implementation suspect within academic settings.
