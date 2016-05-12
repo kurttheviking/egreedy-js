@@ -73,19 +73,21 @@ An instance of the egreedy optimization algorithm.
 **Example**
 
 ```js
-> var Algorithm = require('egreedy');
-> var algorithm = new Algorithm();
-> assert.equal(algorithm.arms, 3);
-> assert.equal(algorithm.epsilon, 0.5);
+var Algorithm = require('egreedy');
+var algorithm = new Algorithm();
+
+assert.equal(algorithm.arms, 3);
+assert.equal(algorithm.epsilon, 0.5);
 ```
 
 Or, with a passed `config`:
 
 ```js
-> var Algorithm = require('egreedy');
-> var algorithm = new Algorithm({arms: 4, epsilon: 0.75});
-> assert.equal(algorithm.arms, 4);
-> assert.equal(algorithm.epsilon, 0.75);
+var Algorithm = require('egreedy');
+var algorithm = new Algorithm({arms: 4, epsilon: 0.75});
+
+assert.equal(algorithm.arms, 4);
+assert.equal(algorithm.epsilon, 0.75);
 ```
 
 #### `Algorithm#select()`
@@ -103,9 +105,10 @@ A promise that resolves to a Number corresponding to the associated arm index.
 **Example**
 
 ```js
-> var Algorithm = require('egreedy');
-> var algorithm = new Algorithm();
-> algorithm.select().then(function (arm) { console.log(arm); });
+var Algorithm = require('egreedy');
+var algorithm = new Algorithm();
+
+algorithm.select().then(function (arm) { console.log(arm); });
 
 0
 ```
@@ -126,9 +129,10 @@ A promise that resolves to a Number representing the count of observed rounds.
 **Example**
 
 ```js
-> var Algorithm = require('egreedy');
-> var algorithm = new Algorithm();
-> algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
+var Algorithm = require('egreedy');
+var algorithm = new Algorithm();
+
+algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
 
 <Algorithm>{
   arms: 2,
@@ -153,9 +157,10 @@ A promise that resolves to an Object representing parameters required to reconst
 **Example**
 
 ```js
-> var Algorithm = require('egreedy');
-> var algorithm = new Algorithm();
-> algorithm.serialize().then(function (state) { console.log(state); });
+var Algorithm = require('egreedy');
+var algorithm = new Algorithm();
+
+algorithm.serialize().then(function (state) { console.log(state); });
 
 {
   arms: 2,
