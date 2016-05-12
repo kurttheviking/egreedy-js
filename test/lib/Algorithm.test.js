@@ -97,7 +97,7 @@ describe('Algorithm', function () {
     var stateLocal;
 
     stateLocal = _.cloneDeep(state);
-    stateLocal.counts = _.random(0, 10);
+    stateLocal.counts = Date.now.toString(36);
 
     function test() {
       return new Algorithm(stateLocal);
@@ -116,7 +116,7 @@ describe('Algorithm', function () {
     var stateLocal;
 
     stateLocal = _.cloneDeep(state);
-    stateLocal.values = _.random(0, 10);
+    stateLocal.values = Date.now.toString(36);
 
     function test() {
       return new Algorithm(stateLocal);
