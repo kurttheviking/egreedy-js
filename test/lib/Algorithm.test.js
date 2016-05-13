@@ -24,6 +24,15 @@ describe('Algorithm', function () {
     expect(test).to.not.throw(Error);
   });
 
+  it('restores instance properties from prior state', function () {
+    var alg = new Algorithm(state);
+
+    expect(alg.arms).to.equal(state.arms);
+    expect(alg.epsilon).to.equal(state.epsilon);
+    expect(alg.counts).to.deep.equal(state.counts);
+    expect(alg.values).to.deep.equal(state.values);
+  });
+
   it('throws TypeError when passed arms=0', function () {
     function test() {
       var alg = new Algorithm({ arms: 0 });
@@ -82,15 +91,6 @@ describe('Algorithm', function () {
     } catch (err) {
       expect(err).to.match(/invalid epsilon: cannot be greater than 1/);
     }
-  });
-
-  it('restores instance properties from prior state', function () {
-    var alg = new Algorithm(state);
-
-    expect(alg.arms).to.equal(state.arms);
-    expect(alg.epsilon).to.equal(state.epsilon);
-    expect(alg.counts).to.deep.equal(state.counts);
-    expect(alg.values).to.deep.equal(state.values);
   });
 
   it('throws if counts is not an array', function () {
