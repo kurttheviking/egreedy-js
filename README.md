@@ -196,7 +196,7 @@ npm run coverage
 
 ## Contribute
 
-PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/egreedy) provides on-demand testing for commits and pull requests.
+PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/egreedy-js) provides on-demand testing for commits and pull requests.
 
 
 ## Caveat emptor
