@@ -64,7 +64,7 @@ The `config` object supports two parameters:
 - `arms`: (Number:Integer, Optional), default=2, the number of arms over which the optimization will operate
 - `epsilon`: (Number:Float, Optional), default=0.5, from 0 (never explore/always exploit) to 1 (always explore/never exploit)
 
-Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/egreedy#algorithmserialize) can be passed as `config`.
+Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/egreedy-js#algorithmserialize) can be passed as `config`.
 
 **Returns**
 
