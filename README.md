@@ -76,7 +76,7 @@ An instance of the egreedy optimization algorithm.
 var Algorithm = require('egreedy');
 var algorithm = new Algorithm();
 
-assert.equal(algorithm.arms, 3);
+assert.equal(algorithm.arms, 2);
 assert.equal(algorithm.epsilon, 0.5);
 ```
 
