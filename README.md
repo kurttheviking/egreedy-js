@@ -10,7 +10,7 @@ This implementation is based on [<em>Bandit Algorithms for Website Optimization<
 
 ## Specification
 
-This module conforms to the [BanditLab/2.0 specification](https://github.com/banditlab/spec-js/releases).
+This module conforms to the [BanditLab/2.0 specification](https://github.com/kurttheviking/banditlab-spec/releases).
 
 
 ## Quick start
