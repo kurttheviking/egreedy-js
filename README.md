@@ -69,7 +69,7 @@ Create a new optimization algorithm.
 The `config` object supports two optional parameters:
 
 - `arms` (`Number`, Integer): The number of arms over which the optimization will operate; defaults to `2`
-- `epsilon` (`Number`, Float, `0` to `1`):  higher leads to more exploration (and less exploitation); defaults to `0.5`
+- `epsilon` (`Number`, Float, `0` to `1`):  lower leads to more exploration (and less exploitation); defaults to `0.5`
 
 Alternatively, the `state` object resolved from [`Algorithm#serialize`](https://github.com/kurttheviking/egreedy-js#algorithmserialize) can be passed as `config`.
 

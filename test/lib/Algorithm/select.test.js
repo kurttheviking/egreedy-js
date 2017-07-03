@@ -4,6 +4,7 @@
 const expect = require('chai').expect;
 
 const randomInteger = require('../../utils/randomInteger');
+const randomFloat = require('../../utils/randomFloat');
 const repeatFunction = require('../../utils/repeatFunction');
 
 describe('Algorithm#select', () => {
@@ -11,7 +12,8 @@ describe('Algorithm#select', () => {
 
   const arms = randomInteger(2, 10);
   const config = {
-    arms
+    arms,
+    epsilon: randomFloat(0.6, 0.8)
   };
 
   it('returns a number', () => {
