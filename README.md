@@ -58,7 +58,7 @@ This implementation often encounters extended floating point numbers. Arm select
 
 ## API
 
-#### `Algorithm(config)`
+### `Algorithm(config)`
 
 Create a new optimization algorithm.
 
@@ -97,7 +97,7 @@ assert.equal(algorithm.arms, 4);
 assert.equal(algorithm.epsilon, 0.75);
 ```
 
-#### `Algorithm#select()`
+### `Algorithm#select()`
 
 Choose an arm to play, according to the specified bandit algorithm.
 
@@ -118,7 +118,7 @@ const algorithm = new Algorithm();
 algorithm.select().then(arm => console.log(arm));
 ```
 
-#### `Algorithm#reward(arm, reward)`
+### `Algorithm#reward(arm, reward)`
 
 Inform the algorithm about the payoff earned from a given arm.
 
@@ -140,7 +140,7 @@ const algorithm = new Algorithm();
 algorithm.reward(0, 1).then(updatedAlgorithm => console.log(updatedAlgorithm));
 ```
 
-#### `Algorithm#serialize()`
+### `Algorithm#serialize()`
 
 Obtain a plain object representing the internal state of the algorithm.
 
