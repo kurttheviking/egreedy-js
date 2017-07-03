@@ -20,7 +20,7 @@ This implementation is based on [<em>Bandit Algorithms for Website Optimization<
 Install with `npm` (or `yarn`):
 
 ```sh
-npm install ucb --save
+npm install egreedy --save
 ```
 
 ### Caveat emptor
