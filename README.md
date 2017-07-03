@@ -164,6 +164,10 @@ algorithm.serialize().then(state => console.log(state));
 
 ## Development
 
+### Contribute
+
+PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/egreedy-js) provides on-demand testing for commits and pull requests.
+
 ### Workflow
 
 1. Feature development and bug fixing should occur on a non-master branch.
@@ -193,7 +197,3 @@ npm run coverage
 ```
 
 **Note:** Tests against stochastic methods (e.g. `Algorithm#select`) are inherently tricky to test with deterministic assertions. The approach here is to iterate across a semi-random set of conditions to verify that each run produces valid output. As a result, each test suite run encounters slightly different execution state. In the future, the test suite should be expanded to include a more robust test of the distribution's properties &ndash; though because of the number of runs required, should be triggered with an optional flag.
-
-### Contribute
-
-PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/softmax-js) provides on-demand testing for commits and pull requests.
