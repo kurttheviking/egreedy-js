@@ -1,14 +1,12 @@
-var Algorithm = require('egreedy');
+/* eslint-disable */
 
-var algorithm = new Algorithm();
+const Algorithm = require('egreedy');
 
-algorithm.select().then(function updateArm(arm) {
+const algorithm = new Algorithm();
+
+algorithm.select().then((arm) => {
   console.log('chose arm', arm);
   return algorithm.reward(arm, 1);
 })
-.then(function serializeAlgorithm() {
-  return algorithm.serialize();
-})
-.then(function displayState(state) {
-  console.log('new state', JSON.stringify(state, null, 2));
-});
+.then(() => algorithm.serialize())
+.then(state => console.log('new state', JSON.stringify(state, null, 2)));

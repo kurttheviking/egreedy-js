@@ -1,105 +1,78 @@
-/* global describe, it, beforeEach, afterEach */
-/* eslint func-names: 0*/
-var _ = require('lodash');
-var BPromise = require('bluebird');
-var chai = require('chai');
-var mockery = require('mockery');
-var sinon = require('sinon');
+/* global describe, it */
+/* eslint-disable global-require, import/no-extraneous-dependencies */
 
-var expect = chai.expect;
+const expect = require('chai').expect;
 
-describe('Algorithm#select', function () {
-  var Algorithm;
-  var arms = _.random(1, 10);
-  var config = { arms: arms, epsilon: _.random(0, 1, true) };
-  var debugSpy;
+const randomInteger = require('../../utils/randomInteger');
+const repeatFunction = require('../../utils/repeatFunction');
 
-  beforeEach(function () {
-    debugSpy = sinon.spy();
+describe('Algorithm#select', () => {
+  const Algorithm = require('../../../index');
 
-    mockery.enable({
-      warnOnReplace: false,
-      warnOnUnregistered: false,
-      useCleanCache: true
-    });
+  const arms = randomInteger(2, 10);
+  const config = {
+    arms
+  };
 
-    mockery.registerMock('debug', function (name) {
-      if (name === 'egreedy:select') {
-        return debugSpy;
-      }
+  it('returns a number', () => {
+    const alg = new Algorithm(config);
 
-      return sinon.spy();
-    });
-
-    Algorithm = require('../../../index');  // eslint-disable-line global-require
-  });
-
-  afterEach(function () {
-    mockery.disable();
-  });
-
-  it('returns a number', function () {
-    var alg = new Algorithm(config);
-
-    alg.select().then(function (arm) {
+    return alg.select().then((arm) => {
       expect(arm).to.be.a('number');
     });
   });
 
-  it('returns a valid arm', function () {
-    var alg = new Algorithm(config);
-    var trials = _.times(_.random(10, 20), alg.select.bind(alg));
+  it('returns a valid arm', () => {
+    const alg = new Algorithm(config);
 
-    return BPromise.all(trials).then(function (selections) {
+    const trials = new Array(randomInteger(10, 20)).fill(-1);
+
+    return Promise.all(trials.map(() => alg.select())).then((selections) => {
       expect(selections.length).to.equal(trials.length);
 
-      selections.forEach(function (choice) {
+      selections.forEach((choice) => {
         expect(choice).to.be.a('number');
         expect(choice).to.be.below(arms);
       });
     });
   });
 
-  it('can always exploit', function () {
-    var configTest = _.assign(
-      _.cloneDeep(config),
-      {
-        epsilon: 0,
-        counts: _.times(arms, _.constant(1)),
-        values: _.times(arms, _.constant(1))
+  it('begins to exploit best arm (first)', () => {
+    const alg = new Algorithm(config);
+    const tasks = [];
+
+    repeatFunction(arms * 10)(
+      () => {
+        tasks.push(() => alg.select().then(arm => alg.reward(arm, arm === 0 ? 1 : 0)));
       }
     );
 
-    var alg = new Algorithm(configTest);
-    var trials = _.times(_.random(10, 20), alg.select.bind(alg));
+    return tasks.reduce((accum, task) => accum.then(task), Promise.resolve())
+    .then(() => {
+      const bestCt = alg.counts[0];
 
-    return BPromise.all(trials).then(function (selections) {
-      expect(selections.length).to.equal(trials.length);
-
-      debugSpy.args.forEach(function (messageArgs) {
-        expect(messageArgs[0].indexOf('exploit')).to.equal(0);
+      alg.counts.slice(1).forEach((ct) => {
+        expect(ct).to.be.below(bestCt);
       });
     });
   });
 
-  it('can always explore', function () {
-    var configTest = _.assign(
-      _.cloneDeep(config),
-      {
-        epsilon: 1,
-        counts: _.times(arms, _.constant(1)),
-        values: _.times(arms, _.constant(1))
+  it('begins to exploit best arm (last)', () => {
+    const alg = new Algorithm(config);
+    const tasks = [];
+
+    repeatFunction(arms * 10)(
+      () => {
+        tasks.push(() => alg.select().then(arm => alg.reward(arm, arm === (arms - 1) ? 1 : 0)));
       }
     );
 
-    var alg = new Algorithm(configTest);
-    var trials = _.times(_.random(10, 20), alg.select.bind(alg));
+    return tasks.reduce((accum, task) => accum.then(task), Promise.resolve())
+    .then(() => {
+      const bestCt = alg.counts[arms - 1];
 
-    return BPromise.all(trials).then(function (selections) {
-      expect(selections.length).to.equal(trials.length);
-
-      debugSpy.args.forEach(function (messageArgs) {
-        expect(messageArgs[0].indexOf('explore')).to.equal(0);
+      alg.counts.slice(0, -1).forEach((ct) => {
+        expect(ct).to.be.below(bestCt);
       });
     });
   });

@@ -1,10 +1,18 @@
-var lint = require('mocha-eslint');
+/* eslint-disable global-require, import/no-extraneous-dependencies, strict */
 
-var options = {};
-var paths = [
-  'lib'
+require('eslint');
+
+const lint = require('mocha-eslint');
+
+const options = {
+  formatter: 'compact',
+  timeout: 5000,
+  slow: 1000
+};
+
+const paths = [
+  'lib',
+  'index.js'
 ];
-
-options.formatter = 'compact';
 
 lint(paths, options);

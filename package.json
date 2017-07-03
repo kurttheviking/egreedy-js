@@ -31,20 +31,20 @@
   },
   "homepage": "https://github.com/kurttheviking/egreedy-js#readme",
   "dependencies": {
-    "bluebird": "3.3.5",
-    "debug": "2.2.0",
-    "lodash": "4.12.0"
+    "debug": "2.6.8",
+    "has": "1.0.1",
+    "random-js": "1.0.8"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "eslint": "2.9.0",
-    "eslint-config-airbnb": "9.0.1",
-    "eslint-plugin-import": "1.8.0",
-    "mocha-eslint": "2.0.2",
-    "istanbul": "0.4.3",
-    "mocha": "2.4.5",
-    "mockery": "1.7.0",
-    "sinon": "1.17.4"
+    "chai": "4.0.2",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "15.0.1",
+    "eslint-plugin-import": "2.3.0",
+    "mocha-eslint": "3.0.1",
+    "istanbul": "0.4.5",
+    "mocha": "3.4.2",
+    "mockery": "2.0.0",
+    "sinon": "2.3.5"
   },
   "scripts": {
     "coverage": "./node_modules/istanbul/lib/cli.js cover --report=json-summary --report=html _mocha ./test -- --recursive",

@@ -1,116 +1,135 @@
 /* global describe, it */
-/* eslint func-names: 0*/
-var _ = require('lodash');
-var chai = require('chai');
+/* eslint-disable global-require, import/no-extraneous-dependencies */
 
-var expect = chai.expect;
+const expect = require('chai').expect;
 
-describe('Algorithm#reward', function () {
-  var Algorithm = require('../../../index');  // eslint-disable-line global-require
-  var arms = _.random(1, 10);
-  var config = {
-    arms: arms,
-    epsilon: _.random(0, 1, true)
+const randomInteger = require('../../utils/randomInteger');
+const randomFloat = require('../../utils/randomFloat');
+
+describe('Algorithm#reward', () => {
+  const Algorithm = require('../../../index');
+
+  const arms = randomInteger(2, 10);
+  const config = {
+    arms,
+    epsilon: randomFloat(0, 1)
   };
 
-  it('updates the values and counts accumulators', function () {
-    var arm = _.random(0, arms - 1);
-    var alg = new Algorithm(config);
-    var val = _.random(0, 1, true);
+  it('updates the values and counts accumulators', () => {
+    const alg = new Algorithm(config);
 
-    alg.reward(arm, val).then(function () {
+    const arm = randomInteger(0, arms - 1);
+    const val = randomInteger(0, 100) / 100;
+
+    return alg.reward(arm, val).then(() => {
       expect(alg.counts[arm]).to.equal(1);
       expect(alg.values[arm]).to.equal(val);
 
-      expect(_.sum(alg.counts)).to.equal(1);
-      expect(_.sum(alg.values)).to.equal(val);
+      expect(alg.counts.reduce((accum, x) => accum + x)).to.equal(1);
+      expect(alg.values.reduce((accum, x) => accum + x)).to.equal(val);
     });
   });
 
-  it('resolves to the updated algorithm instance', function () {
-    var arm = _.random(0, arms - 1);
-    var val = _.random(0, 1, true);
+  it('updates the observation counter', () => {
+    const alg = new Algorithm(config);
 
-    var alg = new Algorithm(config);
-    var sumPre = _.sum(alg.counts);
+    const arm = randomInteger(0, arms - 1);
+    const val = randomInteger(0, 100) / 100;
 
-    alg.reward(arm, val).then(function (updatedAlg) {
-      var sumPost = _.sum(alg.counts);
+    const pre = alg.counts.reduce((out, x) => out + x);
 
-      expect(updatedAlg).to.be.an.instanceof(Algorithm);
-      expect(sumPost).to.equal(sumPre + 1);
+    return alg.reward(arm, val).then(() => {
+      const post = alg.counts.reduce((accum, x) => accum + x);
 
-      expect(updatedAlg.select).to.be.a('function');
-      expect(updatedAlg.reward).to.be.a('function');
-      expect(updatedAlg.serialize).to.be.a('function');
+      expect(post).to.equal(pre + 1);
     });
   });
 
-  it('throws if the arm index is null', function () {
-    var alg = new Algorithm(config);
-    var val = _.random(0, 1, true);
+  it('resolves to the updated algorithm instance', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward(null, val).catch(function (err) {
+    const arm = randomInteger(0, arms - 1);
+    const val = randomInteger(0, 100) / 100;
+
+    return alg.reward(arm, val).then((out) => {
+      expect(out).to.be.an.instanceof(Algorithm);
+
+      expect(out.select).to.be.a('function');
+      expect(out.reward).to.be.a('function');
+      expect(out.serialize).to.be.a('function');
+    });
+  });
+
+  it('throws if the arm index is null', () => {
+    const alg = new Algorithm(config);
+
+    const val = randomInteger(0, 100) / 100;
+
+    return alg.reward(null, val).catch((err) => {
       expect(err).to.match(/missing or invalid required parameter: arm/);
     });
   });
 
-  it('throws if the arm index is negative', function () {
-    var alg = new Algorithm(config);
-    var val = _.random(0, 1, true);
+  it('throws if the arm index is negative', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward(-1, val).catch(function (err) {
+    const val = randomInteger(0, 100) / 100;
+
+    return alg.reward(-1, val).catch((err) => {
       expect(err).to.match(/ arm index out of bounds/);
     });
   });
 
-  it('throws if the arm index exceeds total arms', function () {
-    var alg = new Algorithm(config);
-    var val = _.random(0, 1, true);
+  it('throws if the arm index exceeds total arms', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward(config.arms * 10, val).catch(function (err) {
+    const val = randomInteger(0, 100) / 100;
+
+    return alg.reward(config.arms * 10, val).catch((err) => {
       expect(err).to.match(/ arm index out of bounds/);
     });
   });
 
-  it('throws if the arm index is undefined', function () {
-    var alg = new Algorithm(config);
-    var val = _.random(0, 1, true);
+  it('throws if the arm index is undefined', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward(undefined, val).catch(function (err) {
+    const val = randomInteger(0, 100) / 100;
+
+    return alg.reward(undefined, val).catch((err) => {
       expect(err).to.match(/missing or invalid required parameter: arm/);
     });
   });
 
-  it('throws if the arm index is not a number', function () {
-    var alg = new Algorithm(config);
-    var val = _.random(0, 1, true);
+  it('throws if the arm index is not a number', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward('0', val).catch(function (err) {
+    const val = randomInteger(0, 100) / 100;
+
+    return alg.reward('0', val).catch((err) => {
       expect(err).to.match(/missing or invalid required parameter: arm/);
     });
   });
 
-  it('throws if the reward is null', function () {
-    var alg = new Algorithm(config);
+  it('throws if the reward is null', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward(0, null).catch(function (err) {
+    return alg.reward(0, null).catch((err) => {
       expect(err).to.match(/missing or invalid required parameter: reward/);
     });
   });
 
-  it('throws if the reward is undefined', function () {
-    var alg = new Algorithm(config);
+  it('throws if the reward is undefined', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward(0, undefined).catch(function (err) {
+    return alg.reward(0, undefined).catch((err) => {
       expect(err).to.match(/missing or invalid required parameter: reward/);
     });
   });
 
-  it('throws if the reward is not a number', function () {
-    var alg = new Algorithm(config);
+  it('throws if the reward is not a number', () => {
+    const alg = new Algorithm(config);
 
-    return alg.reward(0, '1').catch(function (err) {
+    return alg.reward(0, '1').catch((err) => {
       expect(err).to.match(/missing or invalid required parameter: reward/);
     });
   });
