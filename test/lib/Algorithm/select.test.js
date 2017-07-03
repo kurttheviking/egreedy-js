@@ -43,7 +43,7 @@ describe('Algorithm#select', () => {
     const alg = new Algorithm(config);
     const tasks = [];
 
-    repeatFunction(arms * 10)(
+    repeatFunction(arms * 100)(
       () => {
         tasks.push(() => alg.select().then(arm => alg.reward(arm, arm === 0 ? 1 : 0)));
       }
