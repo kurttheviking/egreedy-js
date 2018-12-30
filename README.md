@@ -12,7 +12,7 @@ This implementation is based on [<em>Bandit Algorithms for Website Optimization<
 
 ### Prerequisites
 
-- Node.js 4.x+ ([LTS track](https://github.com/nodejs/LTS#lts-schedule1))
+- Node.js 6.x+ ([LTS track](https://github.com/nodejs/LTS#lts-schedule1))
 - npm
 
 ### Installing

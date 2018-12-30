@@ -36,15 +36,15 @@
     "random-js": "1.0.8"
   },
   "devDependencies": {
-    "chai": "4.0.2",
-    "eslint": "3.19.0",
-    "eslint-config-airbnb": "15.0.1",
-    "eslint-plugin-import": "2.3.0",
-    "mocha-eslint": "3.0.1",
+    "chai": "4.2.0",
+    "eslint": "5.11.1",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "mocha-eslint": "5.0.0",
     "istanbul": "0.4.5",
-    "mocha": "3.4.2",
-    "mockery": "2.0.0",
-    "sinon": "2.3.5"
+    "mocha": "5.2.0",
+    "mockery": "2.1.0",
+    "sinon": "7.2.2"
   },
   "scripts": {
     "coverage": "./node_modules/istanbul/lib/cli.js cover --report=json-summary --report=html _mocha ./test -- --recursive",
